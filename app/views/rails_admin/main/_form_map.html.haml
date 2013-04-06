@@ -1,7 +1,17 @@
-= javascript_include_tag ("http://maps.googleapis.com/maps/api/js?key=#{field.google_api_key}&sensor=false&callback=init_map_field")
-
 = javascript_tag do
   :plain
+    (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) {
+        init_map_field();
+        return;
+      }
+
+      js = d.createElement(s); js.id = id;
+      js.src = "http://maps.googleapis.com/maps/api/js?key=#{field.google_api_key}&sensor=false&callback=init_map_field";
+      fjs.parentNode.appendChild(js);
+    }(document, 'script', 'google-maps-script'));
+
     function init_map_field(){
     jQuery(function(){
       var marker = null;
